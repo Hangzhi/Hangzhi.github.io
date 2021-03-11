@@ -197,6 +197,8 @@
 
 </li>
 </ol>
+<h2 id="go-installation"><a href="#go-installation" class="headerlink" title="go installation"></a>go installation</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> wget https://golang.org/dl/go1.16.1.linux-amd64.tar.gz</span><br><span class="line"> tar -zxvf go1.16.1.linux-amd64.tar.gz</span><br><span class="line"> sudo mv go /usr/local</span><br><span class="line"> sudo vim ~/.bashrc</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span><span class="bash"> 在代码最后加入</span> </span><br><span class="line">export GOPATH=$HOME/go</span><br><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export PATH=$PATH:$GOROOT/bin:$GOPATH/bin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 环境变量生效</span></span><br><span class="line">source ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看版本是否安装成功</span></span><br><span class="line">go version</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
         </div>
 
@@ -242,6 +244,8 @@
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/03/11/Binary-Search-Template/">Binary Search Templates —— 算法题模板</a>
             
             
             <a class="next" rel="next" href="/2021/03/04/%E2%80%9C%E5%89%91%E6%8C%87Offer%E2%80%9D/">剑指Offer Python solution</a>
