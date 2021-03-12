@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Yiwei">
+
+
+
+
+
+<title>Python 常用参考 | Hexo</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Yiwei&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Yiwei&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Python 常用参考</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Yiwei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 12, 2021&nbsp;&nbsp;11:41:20</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="The-marvelous-Python"><a href="#The-marvelous-Python" class="headerlink" title="The marvelous Python"></a>The marvelous Python</h1><h2 id="Python带条件判断的赋值语句"><a href="#Python带条件判断的赋值语句" class="headerlink" title="Python带条件判断的赋值语句"></a>Python带条件判断的赋值语句</h2><p>在学C++的时候存在一种一句，a ? b : c。若a为真，返回b，否则返回c。在Python中有多种不同的表达方式。</p>
+<ul>
+<li><p>赋值语句中的if</p>
+<ul>
+<li><pre><code class="python">123 if True else 321
+Out[5]: 123
+
+123 if False else 321
+Out[6]: 321
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 赋值语句中的 and 和 or</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;python</span><br><span class="line">    10 or 20</span><br><span class="line">    Out[7]: 10</span><br><span class="line">    </span><br><span class="line">    10 and 20</span><br><span class="line">    Out[8]: 20</span><br><span class="line">    </span><br><span class="line">    0 or 1</span><br><span class="line">    Out[9]: 1</span><br><span class="line">    </span><br><span class="line">    0 and 1</span><br><span class="line">    Out[10]: 0</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>短路运算符规则：</p>
+<ul>
+<li>表达式从左至右运算。</li>
+<li>若 or 的左侧逻辑值为 True ， 则短路右侧，返回 or 左侧表达式。若从左到右一直是False，即返回最后一个False。</li>
+<li>若 and 的左侧逻辑为 False ， 则短路右侧，返回 and 左侧表达式。若从左到右一直为True，即返回最后一个True。</li>
+</ul>
+</li>
+<li><pre><code class="python">1 and True and 3 and False
+Out[19]: False
+
+1 and True and 3 and 0
+Out[20]: 0
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - Tip： 不建议使用，会伤害可读性。</span><br><span class="line"></span><br><span class="line">- 索引条件赋值</span><br><span class="line"></span><br><span class="line">  - 将bool值作为整型索引</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;python</span><br><span class="line">    (1,2)[True]</span><br><span class="line">    Out[22]: 2</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>类型的布尔判断</p>
+<ul>
+<li><pre><code class="python">(None or int)(&#39;12345&#39;)
+Out[26]: 12345
+
+(str or int)(&#39;12345&#39;)
+Out[27]: &#39;12345&#39;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">## Python dict</span><br><span class="line"></span><br><span class="line">- key value 基础：</span><br><span class="line"></span><br><span class="line">  - key 唯一，是不可变的，比如字符串、数子或者元组。故dict可以作为hashTable来使用，数字也可以作为dict的key。</span><br><span class="line">  - value 可为任意数据类型。</span><br><span class="line"></span><br><span class="line">- 布尔判断</span><br><span class="line"></span><br><span class="line"># Python 内置数据结构、函数及操作符</span><br><span class="line"></span><br><span class="line">## 数据结构</span><br><span class="line"></span><br><span class="line">### 集合 set</span><br><span class="line"></span><br><span class="line">1. 创建</span><br><span class="line"></span><br><span class="line">   1. &#96;&#96;&#96;python</span><br><span class="line">      # 创建空集合</span><br><span class="line">      s &#x3D; set()</span><br><span class="line">      </span><br><span class="line">      # 创建有元素集合</span><br><span class="line">      s &#x3D; &#123;para1, para2,...&#125;</span><br><span class="line">      s &#x3D; set([para1,para2,...]) # set([iterable]) 比如说 string， list </span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p>集合计算</p>
+<ol>
+<li></li>
+<li><pre><code class="python">&gt;&gt;&gt; a = set(&#39;abracadabra&#39;)
+&gt;&gt;&gt; b = set(&#39;alacazam&#39;)
+&gt;&gt;&gt; a                                  
+&#123;&#39;a&#39;, &#39;r&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;&#125;
+# 差集 difference
+&gt;&gt;&gt; a - b                              # 集合a中包含而集合b中不包含的元素
+&#123;&#39;r&#39;, &#39;d&#39;, &#39;b&#39;&#125;
+# 并集 union
+&gt;&gt;&gt; a | b                              # 集合a或b中包含的所有元素
+&#123;&#39;a&#39;, &#39;c&#39;, &#39;r&#39;, &#39;d&#39;, &#39;b&#39;, &#39;m&#39;, &#39;z&#39;, &#39;l&#39;&#125;
+# 交集 intersection
+&gt;&gt;&gt; a &amp; b                              # 集合a和b中都包含了的元素
+&#123;&#39;a&#39;, &#39;c&#39;&#125;
+# 对称差 symmetric difference
+&gt;&gt;&gt; a ^ b                              # 不同时包含于a和b的元素
+&#123;&#39;r&#39;, &#39;d&#39;, &#39;b&#39;, &#39;m&#39;, &#39;z&#39;, &#39;l&#39;&#125;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. 集合的基本操作</span><br><span class="line"></span><br><span class="line">   &#96;&#96;&#96;python</span><br><span class="line">   # 添加元素</span><br><span class="line">   s.add(x) # 在 set 中添加 x</span><br><span class="line">   # 添加元素 2</span><br><span class="line">   s.update(l1,l2) # 在 set 中添加多个元素，参数可以是列表、元组、字典</span><br><span class="line">   # 删除 </span><br><span class="line">   s.remove(x) # x 不存在会报错</span><br><span class="line">   # 删除 2 </span><br><span class="line">   s.remove(x) # x 不存在不会报错</span><br><span class="line">   # 清空</span><br><span class="line">   s.clear() # 清空集合</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   </span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="Priority-Queue"><a href="#Priority-Queue" class="headerlink" title="Priority Queue"></a>Priority Queue</h3><h4 id="priority-queue-基础"><a href="#priority-queue-基础" class="headerlink" title="priority queue 基础"></a>priority queue 基础</h4><h3 id="Dict-字典"><a href="#Dict-字典" class="headerlink" title="Dict 字典"></a>Dict 字典</h3><h4 id="dict-get-key-default-None"><a href="#dict-get-key-default-None" class="headerlink" title="dict.get(key, default = None)"></a>dict.get(key, default = None)</h4><h3 id="OrderedDict"><a href="#OrderedDict" class="headerlink" title="OrderedDict"></a>OrderedDict</h3><p>有顺序的 dict, 基本是 stack + dict 的结合体</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">popitem(last&#x3D;True)</span><br><span class="line">The popitem() method for ordered dictionaries returns and removes a (key, value) pair. The pairs are returned in LIFO order if last is true or FIFO order if false.</span><br><span class="line"></span><br><span class="line">move_to_end(key, last&#x3D;True)</span><br><span class="line">Move an existing key to either end of an ordered dictionary. The item is moved to the right end if last is true (the default) or to the beginning if last is false. Raises KeyError if the key does not exist:</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h2><h3 id="iter"><a href="#iter" class="headerlink" title="iter"></a>iter</h3><p>we can implement iterator using  _<em>iter_\</em></p>
+<ol>
+<li>遍历用法</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> element <span class="keyword">in</span> iterable:</span><br><span class="line">    <span class="comment"># do something with element</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># create an iterator object from that iterable</span></span><br><span class="line">iter_obj = <span class="built_in">iter</span>(iterable)</span><br><span class="line"></span><br><span class="line"><span class="comment"># infinite loop</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># get the next item</span></span><br><span class="line">        element = <span class="built_in">next</span>(iter_obj)</span><br><span class="line">        <span class="comment"># do something with element</span></span><br><span class="line">    <span class="keyword">except</span> StopIteration:</span><br><span class="line">        <span class="comment"># if StopIteration is raised, break from loop</span></span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>in 用法，作为快慢指针使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findLongestWord</span>(<span class="params">self, s: <span class="built_in">str</span>, d: List[<span class="built_in">str</span>]</span>) -&gt; str:</span></span><br><span class="line">    d.sort(key = <span class="keyword">lambda</span> x: (-<span class="built_in">len</span>(x), x))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> <span class="built_in">sorted</span>(d, key = <span class="keyword">lambda</span> x : (-<span class="built_in">len</span>(x), x)) :</span><br><span class="line">        iter_s = <span class="built_in">iter</span>(s)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">all</span>( c <span class="keyword">in</span> iter_s <span class="keyword">for</span> c <span class="keyword">in</span> word) :</span><br><span class="line">            <span class="keyword">return</span> word</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>iter（） 返回 一个 iterator</li>
+<li>ele in iter_s :  执行 next(iter_s) 直到找到 ele，返回 true，iterator 指向下一个。</li>
+<li>如果没有找到：next 执行到尾部之后，或者 iter_s 已经在尾部之后，返回 true。</li>
+</ol>
+</li>
+</ol>
+<h3 id="ord"><a href="#ord" class="headerlink" title="ord"></a>ord</h3><p>ord(‘$’): f返回与当前符号作为 Unicode 所对应的整数。</p>
+<h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">map(function, iterables)</span><br><span class="line">function: function to execute for each item</span><br><span class="line">iterable: iterator object</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myfunc</span>(<span class="params">a, b</span>):</span></span><br><span class="line">  <span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line">x = <span class="built_in">map</span>(myfunc, (<span class="string">&#x27;apple&#x27;</span>, <span class="string">&#x27;banana&#x27;</span>, <span class="string">&#x27;cherry&#x27;</span>), (<span class="string">&#x27;orange&#x27;</span>, <span class="string">&#x27;lemon&#x27;</span>, <span class="string">&#x27;pineapple&#x27;</span>))</span><br><span class="line"></span><br><span class="line">&gt;&gt; [<span class="string">&#x27;appleorange&#x27;</span>, <span class="string">&#x27;bananalemon&#x27;</span>, <span class="string">&#x27;cherrypineapple&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="range"><a href="#range" class="headerlink" title="range"></a>range</h3><ol>
+<li><p>range</p>
+<ol>
+<li><pre><code class="python">range(start, stop[, step])
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### pow</span><br><span class="line"></span><br><span class="line">1. &#96;&#96;&#96;python</span><br><span class="line">   pow(a,b) # 求 a^b 的数值</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="reversed（）"><a href="#reversed（）" class="headerlink" title="reversed（）"></a>reversed（）</h3><p> re</p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>list.sort([reverse = …]) : inplace 对 list 进行 ascending 排序</p>
+<p>sort(list): 返回 sort 的结果</p>
+<h2 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h2><p>示例 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a &#x3D; 0011 1100</span><br><span class="line"></span><br><span class="line">b &#x3D; 0000 1101</span><br></pre></td></tr></table></figure>
+
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值 =="></a>赋值 ==</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = b = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">print(a <span class="keyword">is</span> b)</span><br><span class="line"><span class="comment"># True</span></span><br><span class="line"></span><br><span class="line">a[<span class="number">0</span>] = <span class="number">100</span></span><br><span class="line">print(a)</span><br><span class="line"><span class="comment"># [100, 1, 2]</span></span><br><span class="line"></span><br><span class="line">print(b)</span><br><span class="line"><span class="comment"># [100, 1, 2]</span></span><br></pre></td></tr></table></figure>
+
+<p>将同一个对象赋值给多个 variables</p>
+<h3 id="ASCII-转化"><a href="#ASCII-转化" class="headerlink" title="ASCII 转化"></a>ASCII 转化</h3><ol>
+<li>ord() 和 chr() 之间的相互转化</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ord(&#39;a&#39;) &#x3D; 97</span><br><span class="line">chr(97) &#x3D; &#39;a&#39;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&amp;</td>
+<td align="left">按位与运算符：参与运算的两个值,如果两个相应位都为1,则该位的结果为1,否则为0</td>
+<td align="left">(a &amp; b) 输出结果 12 ，二进制解释： 0000 1100</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">按位或运算符：只要对应的二个二进位有一个为1时，结果位就为1。</td>
+<td align="left">(a | b) 输出结果 61 ，二进制解释： 0011 1101</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">按位异或运算符：当两对应的二进位相异时，结果为1</td>
+<td align="left">(a ^ b) 输出结果 49 ，二进制解释： 0011 0001</td>
+</tr>
+<tr>
+<td align="left">~</td>
+<td align="left">按位取反运算符：对数据的每个二进制位取反,即把1变为0,把0变为1。**~x** 类似于 <strong>-x-1</strong></td>
+<td align="left">(~a ) 输出结果 -61 ，二进制解释： 1100 0011， 在一个有符号二进制数的补码形式。</td>
+</tr>
+<tr>
+<td align="left">&lt;&lt;</td>
+<td align="left">左移动运算符：运算数的各二进位全部左移若干位，由”&lt;&lt;”右边的数指定移动的位数，高位丢弃，低位补0。</td>
+<td align="left">a &lt;&lt; 2 输出结果 240 ，二进制解释： 1111 0000</td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;</td>
+<td align="left">右移动运算符：把”&gt;&gt;”左边的运算数的各二进位全部右移若干位，”&gt;&gt;”右边的数指定移动的位数</td>
+<td align="left">a &gt;&gt; 2 输出结果 15 ，二进制解释： 0000 1111</td>
+</tr>
+</tbody></table>
+<h3 id="mod"><a href="#mod" class="headerlink" title="mod"></a>mod</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a % b</span><br></pre></td></tr></table></figure>
+
+<h3 id="否定符号"><a href="#否定符号" class="headerlink" title="否定符号"></a>否定符号</h3><p>！（exclamation mark）在 python 不适用。</p>
+<p>使用 not 来作为所有想用 ！ 时候的否定符号。</p>
+<h3 id="科学计数法"><a href="#科学计数法" class="headerlink" title="科学计数法"></a>科学计数法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2*(10^9) : 2e9</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Python-List"><a href="#Python-List" class="headerlink" title="Python List"></a>Python List</h1><h2 id="二维列表初始化"><a href="#二维列表初始化" class="headerlink" title="二维列表初始化"></a>二维列表初始化</h2><ol>
+<li><p>如果按照l=[[0]*m]*n 的方式赋值，得到的结果是指向[0]*m的n个指针。所以如果对l[p][q]=0这样赋值，会对所有list的index为q的位置进行赋值。</p>
+</li>
+<li><p>所以要按照一种新方法进行赋值</p>
+<ol>
+<li><pre><code class="python">l = [[0]*m for _ in range(n)]
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">## 列表解析</span><br><span class="line"></span><br><span class="line">使用列表 filter 来进行新列表赋值。</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">[expr for iter_val in iterable if cond_expr]</span><br></pre></td></tr></table></figure>
+
+
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="”-“-操作符-——-列表链接"><a href="#”-“-操作符-——-列表链接" class="headerlink" title="”+“ 操作符 —— 列表链接"></a>”+“ 操作符 —— 列表链接</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">b = [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"></span><br><span class="line">c = a+b</span><br><span class="line"></span><br><span class="line">c的结果：[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<h2 id="按照第一个元素进行排序"><a href="#按照第一个元素进行排序" class="headerlink" title="按照第一个元素进行排序"></a>按照第一个元素进行排序</h2><ol>
+<li><p>sort in_place </p>
+</li>
+<li><p>按照第一个元素进行 sort</p>
+<ol>
+<li><pre><code>t.sort(key = lambda x: x[0])
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. sorted（list）：返回值就是按照第一个元素</span><br><span class="line"></span><br><span class="line">4. reversed ： reverse &#x3D; True 降序，reverse &#x3D; False 升序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 删除元素</span><br><span class="line"></span><br><span class="line">- Remove all items: &#96;clear()&#96;</span><br><span class="line">- Remove an item by index and get its value: &#96;pop()&#96;</span><br><span class="line">- Remove an item by value: &#96;remove()&#96;</span><br><span class="line">- Remove items by index or slice: &#96;del&#96;</span><br><span class="line">- Remove items that meet the condition: List comprehensions</span><br><span class="line"></span><br><span class="line">#  Python 数据结构实现</span><br><span class="line"></span><br><span class="line">## Queue</span><br><span class="line"></span><br><span class="line">1. 数据结构特性: First In First Out </span><br><span class="line"></span><br><span class="line">2. 数据操作：</span><br><span class="line"></span><br><span class="line">   1. Enqueue : add an item to the queue, overflow should be warned</span><br><span class="line">   2. Dequeue: remove an item from the queue, underflow should be warned</span><br><span class="line">   3. Front: get the front item 最早被压入队列的元素</span><br><span class="line">   4. Rear: get the last item 最后被压入队列的元素</span><br><span class="line"></span><br><span class="line">3. 实现方式</span><br><span class="line"></span><br><span class="line">   1. Python list</span><br><span class="line"></span><br><span class="line">   2. collection.deque</span><br><span class="line"></span><br><span class="line">      1. &#96;&#96;&#96;python</span><br><span class="line">         from collections import deque </span><br><span class="line">           </span><br><span class="line">         # Initializing a queue </span><br><span class="line">         q &#x3D; deque() </span><br><span class="line">           </span><br><span class="line">         # Adding elements to a queue </span><br><span class="line">         q.append(&#39;a&#39;) </span><br><span class="line">         q.append(&#39;b&#39;) </span><br><span class="line">         q.append(&#39;c&#39;) </span><br><span class="line">           </span><br><span class="line">         print(&quot;Initial queue&quot;) </span><br><span class="line">         print(q) </span><br><span class="line">           </span><br><span class="line">         # Removing elements from a queue </span><br><span class="line">         print(&quot;\nElements dequeued from the queue&quot;) </span><br><span class="line">         print(q.popleft()) </span><br><span class="line">         print(q.popleft()) </span><br><span class="line">         print(q.popleft()) </span><br><span class="line">           </span><br><span class="line">         print(&quot;\nQueue after removing elements&quot;) </span><br><span class="line">         print(q) </span><br><span class="line">         </span><br><span class="line">         # output </span><br><span class="line">         Initial queue</span><br><span class="line">         deque([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])</span><br><span class="line">         </span><br><span class="line">         Elements dequeued from the queue</span><br><span class="line">         a</span><br><span class="line">         b</span><br><span class="line">         c</span><br><span class="line">         </span><br><span class="line">         Queue after removing elements</span><br><span class="line">         deque([])</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li><p>queue.Queue</p>
+<ol>
+<li><p>build - in Python function </p>
+</li>
+<li><p>functions:</p>
+<ol>
+<li><pre><code class="python"># initiate
+q = Queue(maxsize = 3)
+
+# add element to the queue
+q.put(&#39;a&#39;)
+
+# get element from the queue
+q.get() # &#39;a&#39; FIFO
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. Example </span><br><span class="line"></span><br><span class="line">   &#96;&#96;&#96;python </span><br><span class="line">   # Python program to </span><br><span class="line">   # demonstrate implementation of </span><br><span class="line">   # queue using queue module </span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">   from queue import Queue </span><br><span class="line">     </span><br><span class="line">   # Initializing a queue </span><br><span class="line">   q &#x3D; Queue(maxsize &#x3D; 3) </span><br><span class="line">   # maxmize is the initial size of the queue</span><br><span class="line">   # maxmize &#x3D; 0: this is an infinite queue</span><br><span class="line">     </span><br><span class="line">   # qsize() give the maxsize  </span><br><span class="line">   # of the Queue  </span><br><span class="line">   print(q.qsize())  # 0</span><br><span class="line">     </span><br><span class="line">   # Adding of element to queue </span><br><span class="line">   q.put(&#39;a&#39;) </span><br><span class="line">   q.put(&#39;b&#39;) </span><br><span class="line">   q.put(&#39;c&#39;) </span><br><span class="line">     </span><br><span class="line">   # Return Boolean for Full  </span><br><span class="line">   # Queue  </span><br><span class="line">   print(&quot;\nFull: &quot;, q.full())  # Full: True</span><br><span class="line">   </span><br><span class="line">   # Removing element from queue </span><br><span class="line">   print(&quot;\nElements dequeued from the queue&quot;) </span><br><span class="line">   print(q.get()) # a</span><br><span class="line">   print(q.get()) # b</span><br><span class="line">   print(q.get()) # c</span><br><span class="line">     </span><br><span class="line">   # Return Boolean for Empty  </span><br><span class="line">   # Queue  </span><br><span class="line">   print(&quot;\nEmpty: &quot;, q.empty()) # Empty: True</span><br><span class="line">     </span><br><span class="line">   q.put(1) </span><br><span class="line">   print(&quot;\nEmpty: &quot;, q.empty())  # Empty: False</span><br><span class="line">   print(&quot;Full: &quot;, q.full())  # Full: False</span><br><span class="line">     </span><br><span class="line">   # This would result into Infinite  </span><br><span class="line">   # Loop as the Queue is empty.  </span><br><span class="line">   # print(q.get()) </span><br><span class="line">     </span><br></pre></td></tr></table></figure>
+
+
+
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> *</span><br><span class="line">heappush(heap, i) 按照 heap 的大小排序进行</span><br><span class="line">heappop(heap)</span><br><span class="line">heapify(<span class="built_in">list</span>)</span><br><span class="line">heapreplace(heap, i) 置换，先返回最小的值再进行 push</span><br><span class="line">heappushpop(heap, i) 顾名思义，先 push i，再进行 pop 操作</span><br></pre></td></tr></table></figure>
+
+<p>heapq 中没有接受 key 排序函数的 feature，可以使用（key, task）的符合键来完成排序与 task 不一致的任务。</p>
+<h1 id="Tricks"><a href="#Tricks" class="headerlink" title="Tricks"></a>Tricks</h1><h2 id="三个布尔变量，有两个或者两个以上为True才返回为True"><a href="#三个布尔变量，有两个或者两个以上为True才返回为True" class="headerlink" title="三个布尔变量，有两个或者两个以上为True才返回为True"></a>三个布尔变量，有两个或者两个以上为True才返回为True</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(b||c) <span class="keyword">if</span> a <span class="keyword">else</span> (b &amp;&amp; c)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a <span class="keyword">if</span> a == b <span class="keyword">else</span> c</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Attention: None != False</li>
+</ul>
+<h1 id="Python-常用函数"><a href="#Python-常用函数" class="headerlink" title="Python 常用函数"></a>Python 常用函数</h1><h2 id="内置"><a href="#内置" class="headerlink" title="内置"></a>内置</h2><h2 id="vector-初始化"><a href="#vector-初始化" class="headerlink" title="vector 初始化"></a>vector 初始化</h2><ol>
+<li><p>给定vector规模的vector初始化。</p>
+<ol>
+<li><pre><code class="c++">vector&lt;int&gt; m(cost.size() + 1); // 长度为cost.size()+1, 元素都为0的vector
+vector&lt;vector&lt;vector&lt;strig&gt;&gt;&gt; dp(n) ; //仅指定第第一维的大小
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="自增运算符的区别"><a href="#自增运算符的区别" class="headerlink" title="自增运算符的区别"></a>自增运算符的区别</h2><ol>
+<li><p> a ++ ： 先返回，后自增</p>
+</li>
+<li><p>++ a：先自增，后返回</p>
+</li>
+<li><p>例子</p>
+<ol>
+<li><pre><code class="c++">int a = 20  
+c = a ++ // c - 20, a - 21
+b = ++ a // b - 22, 
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 队列 queue</span><br><span class="line"></span><br><span class="line">1. 基本操作</span><br><span class="line">   1. 入队，如例：q.push(x); 将x接到队列的末端</span><br><span class="line">   2. 出队，如例：q.pop(); 弹出队列的第一个元素，注意，并不会返回被弹出元素的值。</span><br><span class="line">   3. 访问队首元素，如例：q.front()，即最早被压入队列的元素。</span><br><span class="line">   4. 访问队尾元素，如例：q.back()，即最后被压入队列的元素。</span><br><span class="line">   5. 判断队列空，如例：q.empty()，当队列空时，返回true。</span><br><span class="line">   6. 访问队列中的元素个数，如例：q.size()</span><br><span class="line"></span><br><span class="line">##  C++ string substr()</span><br><span class="line"></span><br><span class="line">1. 成员函数 </span><br><span class="line"></span><br><span class="line">   1. &#96;&#96;&#96;c++</span><br><span class="line">      string substr (size_t pos &#x3D; 0, size_t len &#x3D; npos) const;</span><br><span class="line">      &#x2F;&#x2F; para1：子串开始位置，para2：子串长度</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+<li></li>
+</ol>
+</li>
+</ol>
+<h1 id="神奇的位操作"><a href="#神奇的位操作" class="headerlink" title="神奇的位操作"></a>神奇的位操作</h1><h2 id="判断一个数是否为-2-的幂："><a href="#判断一个数是否为-2-的幂：" class="headerlink" title="判断一个数是否为 2 的幂："></a>判断一个数是否为 2 的幂：</h2><ol>
+<li>num &amp;（num - 1） == 0<ol>
+<li></li>
+</ol>
+</li>
+</ol>
+<h1 id="常用的库"><a href="#常用的库" class="headerlink" title="常用的库"></a>常用的库</h1><h2 id="collection"><a href="#collection" class="headerlink" title="collection"></a>collection</h2><h3 id="OrderedDict-1"><a href="#OrderedDict-1" class="headerlink" title="OrderedDict"></a>OrderedDict</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dic &#x3D; OrderedDict()</span><br><span class="line"># move_to_end()</span><br><span class="line">dic.move_to_end(key) 将一个元素移动到有序列表的末尾</span><br><span class="line"># popitem()</span><br><span class="line">dic.popitem(last &#x3D; False) FIFO</span><br><span class="line">dic.popitem(last &#x3D; True) LIFO</span><br></pre></td></tr></table></figure>
+
+<h2 id="Bisect"><a href="#Bisect" class="headerlink" title="Bisect"></a>Bisect</h2><p>用于数组二分查找算法的调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bisect.bisect_left(a, x, lo=<span class="number">0</span>, hi=<span class="built_in">len</span>(a)) <span class="comment"># 返回左插入点</span></span><br><span class="line">bisect.bisect_right(a, x, lo=<span class="number">0</span>, hi=<span class="built_in">len</span>(a))</span><br><span class="line">bisect.bisect(a, x, lo=<span class="number">0</span>, hi=<span class="built_in">len</span>(a)) <span class="comment"># 返回的插入点是已存在元素的右侧</span></span><br><span class="line">bisect.insort_left(a, x, lo=<span class="number">0</span>, hi=<span class="built_in">len</span>(a)) <span class="comment"># 插入并维持有序</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">find_gt</span>(<span class="params">a, x</span>):</span></span><br><span class="line">    <span class="string">&#x27;Find leftmost value greater than x&#x27;</span></span><br><span class="line">    i = bisect_right(a, x)</span><br><span class="line">    <span class="keyword">if</span> i != <span class="built_in">len</span>(a):</span><br><span class="line">        <span class="keyword">return</span> a[i]</span><br><span class="line">    <span class="keyword">raise</span> ValueError</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Yiwei</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://hangzhi.github.io/2021/03/12/python-for-ref/">https://hangzhi.github.io/2021/03/12/python-for-ref/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Python/"># Python</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/03/11/Binary-Search-Template/">Binary Search Templates —— 算法题模板</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Yiwei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
