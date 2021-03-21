@@ -12,7 +12,7 @@
 
 
 
-<title>lc_weekly_contest | Hexo</title>
+<title>LeetCode Weekly Contest Record | Hexo</title>
 
 
 
@@ -107,11 +107,73 @@
             <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">lc_weekly_contest</h1>
+            <h1 class="post-title">LeetCode Weekly Contest Record</h1>
             
                 <div class="post-meta">
                     
@@ -129,7 +191,28 @@
         </header>
 
         <div class="post-content">
-            
+            <h1 id="233"><a href="#233" class="headerlink" title="233"></a>233</h1><p>![image-20210321125542162](C:\Users\Dai Yiwei\AppData\Roaming\Typora\typora-user-images\image-20210321125542162.png)</p>
+<h2 id="Maximum-Ascending-Subarray-Sum"><a href="#Maximum-Ascending-Subarray-Sum" class="headerlink" title="Maximum Ascending Subarray Sum"></a><a target="_blank" rel="noopener" href="https://leetcode.com/contest/weekly-contest-233/problems/maximum-ascending-subarray-sum">Maximum Ascending Subarray Sum</a></h2><p>Idea: greedy. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxAscendingSum</span>(<span class="params">self, nums: List[<span class="built_in">int</span>]</span>) -&gt; int:</span></span><br><span class="line">        curCount = <span class="number">0</span></span><br><span class="line">        pre = <span class="number">0</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> n <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> n &gt; pre:</span><br><span class="line">                curCount += n</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                curCount = n</span><br><span class="line">            pre = n</span><br><span class="line">            ans = <span class="built_in">max</span>(curCount, ans)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<h2 id="Number-of-Orders-in-the-Backlog"><a href="#Number-of-Orders-in-the-Backlog" class="headerlink" title="Number of Orders in the Backlog"></a><a target="_blank" rel="noopener" href="https://leetcode.com/contest/weekly-contest-233/problems/number-of-orders-in-the-backlog">Number of Orders in the Backlog</a></h2><p>Idea: Match making of  a limit order book </p>
+<h2 id="ordered-HashMap-Ordered-List-unordered-Map"><a href="#ordered-HashMap-Ordered-List-unordered-Map" class="headerlink" title="ordered HashMap (Ordered List + unordered Map)"></a>ordered HashMap (Ordered List + unordered Map)</h2><p>solution during contest</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNumberOfBacklogOrders</span>(<span class="params">self, orders: List[List[<span class="built_in">int</span>]]</span>) -&gt; int:</span></span><br><span class="line">        MOD = <span class="number">1000000007</span></span><br><span class="line">        buy = []</span><br><span class="line">        sell = []</span><br><span class="line">        buypm = &#123;&#125;</span><br><span class="line">        sellpm = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> p, m, t <span class="keyword">in</span> orders:</span><br><span class="line">            <span class="keyword">if</span> t == <span class="number">0</span>: </span><br><span class="line">                <span class="keyword">while</span> m &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">len</span>(sell) &gt; <span class="number">0</span> <span class="keyword">and</span> sell[<span class="number">0</span>] &lt;= p:</span><br><span class="line">                    <span class="keyword">if</span> sellpm[sell[<span class="number">0</span>]] &gt; m:</span><br><span class="line">                        sellpm[sell[<span class="number">0</span>]] -= m</span><br><span class="line">                        m = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        m -= sellpm[sell[<span class="number">0</span>]]</span><br><span class="line">                        <span class="keyword">del</span> sellpm[sell.pop(<span class="number">0</span>)] </span><br><span class="line">                <span class="keyword">if</span> m &gt; <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> buy:</span><br><span class="line">                        insort(buy, p)</span><br><span class="line">                        buypm[p] = m</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        buypm[p] += m</span><br><span class="line">                    </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">while</span> m &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">len</span>(buy) &gt; <span class="number">0</span> <span class="keyword">and</span> buy[-<span class="number">1</span>] &gt;= p:</span><br><span class="line">                    <span class="keyword">if</span> buypm[buy[-<span class="number">1</span>]] &gt; m:</span><br><span class="line">                        buypm[buy[-<span class="number">1</span>]] -= m</span><br><span class="line">                        m = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        m -= buypm[buy[-<span class="number">1</span>]]</span><br><span class="line">                        <span class="keyword">del</span> buypm[buy.pop()]</span><br><span class="line">                <span class="keyword">if</span> m &gt; <span class="number">0</span>:</span><br><span class="line">                    <span class="keyword">if</span> p <span class="keyword">not</span> <span class="keyword">in</span> sell:</span><br><span class="line">                        insort(sell, p)</span><br><span class="line">                        sellpm[p] = m</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        sellpm[p] += m</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">sum</span>(sellpm.values()) + <span class="built_in">sum</span>(buypm.values())) % MOD</span><br><span class="line">            </span><br></pre></td></tr></table></figure>
+
+<h3 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority queue"></a>priority queue</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> heapq <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNumberOfBacklogOrders</span>(<span class="params">self, orders: List[List[<span class="built_in">int</span>]]</span>) -&gt; int:</span></span><br><span class="line">        MOD = <span class="number">1000000007</span></span><br><span class="line">        buy = [] <span class="comment"># a MAX priority queue</span></span><br><span class="line">        sell = [] <span class="comment"># a Min pririty queue</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> p, m, t <span class="keyword">in</span> orders:</span><br><span class="line">            <span class="keyword">if</span> t == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">while</span> m &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">len</span>(sell) &gt; <span class="number">0</span> <span class="keyword">and</span> sell[<span class="number">0</span>][<span class="number">0</span>] &lt;= p:</span><br><span class="line">                    <span class="keyword">if</span> sell[<span class="number">0</span>][<span class="number">1</span>] &gt; m:</span><br><span class="line">                        sell[<span class="number">0</span>][<span class="number">1</span>] -= m</span><br><span class="line">                        m = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        m -= sell[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">                        heappop(sell)</span><br><span class="line">                <span class="keyword">if</span> m &gt; <span class="number">0</span>:</span><br><span class="line">                    heappush(buy, [-p, m])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">while</span> m &gt;<span class="number">0</span> <span class="keyword">and</span> <span class="built_in">len</span>(buy) &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">abs</span>(buy[<span class="number">0</span>][<span class="number">0</span>]) &gt;= p:</span><br><span class="line">                    <span class="keyword">if</span> buy[<span class="number">0</span>][<span class="number">1</span>] &gt; m:</span><br><span class="line">                        buy[<span class="number">0</span>][<span class="number">1</span>] -= m</span><br><span class="line">                        m = <span class="number">0</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        m -= buy[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">                        heappop(buy)</span><br><span class="line">                <span class="keyword">if</span> m &gt; <span class="number">0</span>:</span><br><span class="line">                    heappush(sell, [p, m])</span><br><span class="line">        ans = <span class="built_in">sum</span>([i[<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> buy ]) % MOD + <span class="built_in">sum</span>(i[<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> sell) % MOD</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ans % MOD</span><br></pre></td></tr></table></figure>
+
+<h2 id="Maximum-Value-at-a-Given-Index-in-a-Bounded-Array"><a href="#Maximum-Value-at-a-Given-Index-in-a-Bounded-Array" class="headerlink" title="Maximum Value at a Given Index in a Bounded Array"></a><a target="_blank" rel="noopener" href="https://leetcode.com/contest/weekly-contest-233/problems/maximum-value-at-a-given-index-in-a-bounded-array">Maximum Value at a Given Index in a Bounded Array</a></h2><p>Binary Search</p>
+<p>Tip: just use the template of binary search, convert the problem to find the minimum value to make g(m) true</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27; find the value to make g(m) true &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> l &lt; r: <span class="comment"># pay attention to the range also!</span></span><br><span class="line">    m = l + (r-l)//<span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> g(m): </span><br><span class="line">        r = m</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        l = m + <span class="number">1</span></span><br><span class="line">        </span><br><span class="line"><span class="keyword">return</span> l <span class="comment"># l is the answer </span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 10</span></span><br><span class="line"><span class="comment"># [2,3,2,1,0,0,0]</span></span><br><span class="line"><span class="comment"># find the maximum value that fits in </span></span><br><span class="line"><span class="comment"># [1,2,1]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxValue</span>(<span class="params">self, n: <span class="built_in">int</span>, index: <span class="built_in">int</span>, maxSum: <span class="built_in">int</span></span>) -&gt; int:</span></span><br><span class="line">        maxSum -= n </span><br><span class="line">        <span class="keyword">if</span> maxSum == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">countM</span>(<span class="params">i, p, l</span>):</span></span><br><span class="line">            <span class="keyword">if</span> p == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            left = <span class="built_in">min</span>(i, p-<span class="number">1</span>)</span><br><span class="line">            right = <span class="built_in">min</span>(l - i, p)</span><br><span class="line">            <span class="keyword">return</span> (<span class="built_in">max</span>(p-left,<span class="number">0</span> ) + <span class="built_in">max</span>(p-<span class="number">1</span>,<span class="number">0</span>))* left /<span class="number">2</span> + (p + <span class="built_in">max</span>(p - (right-<span class="number">1</span>), <span class="number">0</span>))* right / <span class="number">2</span></span><br><span class="line">                                                  </span><br><span class="line">        l = <span class="number">0</span></span><br><span class="line">        r = maxSum + n  <span class="comment"># upper exclusive bound ！！！</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># find the min make g(m) valid  </span></span><br><span class="line">        <span class="comment"># find the max countM(index, m, n) &lt;= maxSum  &lt;=&gt; find the min countM(index, m, n) &gt; maxSum , index -= 1</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> l &lt; r:</span><br><span class="line">            m = l + (r-l)//<span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> countM(index, m, n) &gt; maxSum: </span><br><span class="line">                r = m                        <span class="comment">#[l, m)</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                l = m + <span class="number">1</span>                    <span class="comment">#[m+1, r) countM(index, m, n) &lt;= maxSum</span></span><br><span class="line">        <span class="keyword">return</span> l </span><br><span class="line">                </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Count-Pairs-With-XOR-in-a-Range"><a href="#Count-Pairs-With-XOR-in-a-Range" class="headerlink" title="Count Pairs With XOR in a Range"></a><a target="_blank" rel="noopener" href="https://leetcode.com/contest/weekly-contest-233/problems/count-pairs-with-xor-in-a-range">Count Pairs With XOR in a Range</a></h2><p>I didn’t figure this hard problem out in the weekly contest. </p>
+
         </div>
 
         
@@ -161,6 +244,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/Algorithm/"># Algorithm</a>
+                    
+                        
                 </span>
             </div>
             <div>
