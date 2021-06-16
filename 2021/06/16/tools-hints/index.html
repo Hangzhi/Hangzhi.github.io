@@ -12,7 +12,7 @@
 
 
 
-<title>Tools - short cuts, commandline, config and installation | Yiwei</title>
+<title>Hints for ref | Yiwei</title>
 
 
 
@@ -165,7 +165,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">Tools - short cuts, commandline, config and installation</h1>
+            <h1 class="post-title">Hints for ref</h1>
             
                 <div class="post-meta">
                     
@@ -174,7 +174,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">April 16, 2021&nbsp;&nbsp;16:36:47</a>
+                        Date: <a href="#">June 16, 2021&nbsp;&nbsp;15:28:28</a>
                         </span>
                     
                     
@@ -189,19 +189,31 @@
 
 <h2 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">screen shot: Shift + Command + 5</span><br><span class="line">switch full screen mode: Command + Control + F</span><br></pre></td></tr></table></figure>
 
-<h1 id="Command-line"><a href="#Command-line" class="headerlink" title="Command line"></a>Command line</h1><p>ref ： <a target="_blank" rel="noopener" href="https://www.linuxcool.com/">https://www.linuxcool.com/</a></p>
+<h1 id="Command-line"><a href="#Command-line" class="headerlink" title="Command line"></a>Command line</h1><h2 id="LInux-command-line"><a href="#LInux-command-line" class="headerlink" title="LInux command line"></a>LInux command line</h2><p>ref ： <a target="_blank" rel="noopener" href="https://www.linuxcool.com/">https://www.linuxcool.com/</a></p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建 post</span> </span><br><span class="line">hexo new title </span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h1><h2 id="Linux-Ubuntu-1"><a href="#Linux-Ubuntu-1" class="headerlink" title="Linux Ubuntu"></a>Linux Ubuntu</h2><h3 id="系统设置"><a href="#系统设置" class="headerlink" title="系统设置"></a>系统设置</h3><ol>
-<li><p>/etc 目录下 profile 、bash.bashrc 和用户目录下 .profile 、.bashrc 的区别？</p>
-<ol>
-<li><p>/etc/profile 和 bash.bashrc 的文件是针对所用用户来说的，每个用户登录的时候都会执行。profile 只执行一次，bash.bashrc 在每次登录 Shell 的时候都会执行。bash.bashrc 包含在 profile 内。</p>
-</li>
-<li><p>~/.profile 和 ~/.bashrc 文件是针对单个用户的。</p>
-<ol>
+<li>/etc 目录下 profile 、bash.bashrc 和用户目录下 .profile 、.bashrc 的区别？<ol>
+<li>/etc/profile 和 bash.bashrc 的文件是针对所用用户来说的，每个用户登录的时候都会执行。profile 只执行一次，bash.bashrc 在每次登录 Shell 的时候都会执行。bash.bashrc 包含在 profile 内。</li>
+<li>~/.profile 和 ~/.bashrc 文件是针对单个用户的。<ol>
 <li>~./profile : Login Shell 登录时执行：其中包括执行 ~/.bashrc</li>
 <li>~/.bashrc : Non-login Shell 登录时执行</li>
 </ol>
 </li>
 </ol>
+</li>
+</ol>
+<h1 id="Installations"><a href="#Installations" class="headerlink" title="Installations"></a>Installations</h1><h2 id="Prometheus-安装"><a href="#Prometheus-安装" class="headerlink" title="Prometheus 安装"></a>Prometheus 安装</h2><p>鉴于 docker 弄了好久没有搞定，所以还是装在本地吧</p>
+<p>参考链接： <a target="_blank" rel="noopener" href="https://prometheus.io/docs/prometheus/latest/getting_started/">https://prometheus.io/docs/prometheus/latest/getting_started/</a></p>
+<ol>
+<li><p>环境 </p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">windows + 虚拟机： win10 + VMware Workstation 15 + Ubuntu 20.04.1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 Prometheus</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载安装包并解压</span></span><br><span class="line">wget https://github.com/prometheus/prometheus/releases/download/v2.27.1/prometheus-2.27.1.linux-amd64.tar.gz</span><br><span class="line">tar xvfz prometheus-2.27.1.linux-amd64.tar.gz</span><br><span class="line">mv prometheus-2.27.1.linux-amd64 prometheus</span><br><span class="line"><span class="built_in">cd</span> prometheus</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 Prometheus</span></span><br><span class="line">./prometheus --config.file=prometheus.yml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打开浏览器 http://localhost:9090/ 就能看到图形界面了。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭 Prometheus：Ctrl + c</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 
@@ -218,7 +230,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://hangzhi.github.io/2021/04/16/git-hints/">https://hangzhi.github.io/2021/04/16/git-hints/</a></span>
+                        <span><a href="https://hangzhi.github.io/2021/06/16/tools-hints/">https://hangzhi.github.io/2021/06/16/tools-hints/</a></span>
                     </p>
                 
                 
@@ -246,10 +258,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2021/04/22/%E2%80%9C%E5%89%91%E6%8C%87Offer%E2%80%9D/">剑指Offer Python solution (完结)</a>
             
-            
-            <a class="next" rel="next" href="/2021/04/01/go-tut/">Go 复习与查缺补漏</a>
+            <a class="next" rel="next" href="/2021/05/09/common-algo/">复习 - 常见算法</a>
             
         </section>
 
