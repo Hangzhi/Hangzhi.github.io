@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Yiwei">
+
+
+
+
+
+<title>makefile-tut | Yiwei</title>
+
+
+
+    <link rel="icon" href="/image/y_favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Yiwei&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Yiwei&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">makefile-tut</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Yiwei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 23, 2021&nbsp;&nbsp;3:08:28</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="Makefiles"><a href="#Makefiles" class="headerlink" title="Makefiles"></a>Makefiles</h1><h1 id="Makefiles-tutorial"><a href="#Makefiles-tutorial" class="headerlink" title="Makefiles tutorial"></a>Makefiles tutorial</h1><p>ref: <a target="_blank" rel="noopener" href="https://makefiletutorial.com/">https://makefiletutorial.com/</a></p>
+<h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started"></a>Getting started</h2><p>Makefiles 是用来帮助我们决定在一个项目里那些文件需要被 compiled 的。以如下的 cpp 项目为例，如果任何一个文件的依赖发生了变化，文件都会被重新编译。</p>
+<p><img src="/.io//makefile-tut%5Cdependency.png" alt="dependency"></p>
+<p>除了 Makefiles 之外，其替代品还有还有流行的编译工具比如说 <a target="_blank" rel="noopener" href="https://bazel.build/">Bazel</a>。</p>
+<h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><p>一个 Makefile 会有一些规则，通常看起来是如下的样子。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">targets: prerequisites</span></span><br><span class="line">   command</span><br><span class="line">   command</span><br><span class="line">   command</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>targets : 文件名，使用空格进行分隔。通常，每个 rule 只有一个。</li>
+<li>commands：commands 是通常用来 make targets 的一系列操作。需要以 tab 开头，而不是 spaces</li>
+<li>prerequisites：是为了 make targets 所需要的文件。</li>
+</ul>
+<h2 id="Beginner-Example"><a href="#Beginner-Example" class="headerlink" title="Beginner Example"></a>Beginner Example</h2><p>some_file 运行的时候会先 check dependencies。clean 常被用来清除 make 的文件，但是并不是是 Make 的保留字。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">some_file: other_file</span></span><br><span class="line">    echo <span class="string">&quot;This will run second, because it depends on other_file&quot;</span></span><br><span class="line">    touch some_file</span><br><span class="line"></span><br><span class="line"><span class="section">other_file:</span></span><br><span class="line">    echo <span class="string">&quot;This will run first&quot;</span></span><br><span class="line">    touch other_file</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f other_file some_file</span><br></pre></td></tr></table></figure>
+
+<p>多 targets 的 make</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: one two three</span></span><br><span class="line"></span><br><span class="line"><span class="section">one:</span></span><br><span class="line">    touch one</span><br><span class="line"><span class="section">two:</span></span><br><span class="line">    touch two</span><br><span class="line"><span class="section">three:</span></span><br><span class="line">    touch three</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f one two three</span><br></pre></td></tr></table></figure>
+
+<h2 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h2><p>Makefile 的变量只能是 string，可以使用 $(variable) 或者 ${variable} 引用</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">iles = file1 file2</span><br><span class="line"><span class="section">some_file: <span class="variable">$(files)</span></span></span><br><span class="line">    echo <span class="string">&quot;Look at this variable: &quot;</span> <span class="variable">$(files)</span></span><br><span class="line">    touch some_file</span><br><span class="line"></span><br><span class="line"><span class="section">file1:</span></span><br><span class="line">    touch file1</span><br><span class="line"><span class="section">file2:</span></span><br><span class="line">    touch file2</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f file1 file2 some_file</span><br></pre></td></tr></table></figure>
+
+<h2 id="Automatic-variables-and-Wildcards"><a href="#Automatic-variables-and-Wildcards" class="headerlink" title="Automatic variables and Wildcards"></a>Automatic variables and Wildcards</h2><ul>
+<li><ul>
+<li><p>wildcard。* 可以在用来搜索所有匹配的文件名。建议永远将 * 放在 wildcards function 中，否则很容易出问题</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">thing_wrong := *.o <span class="comment"># Don&#x27;t do this! &#x27;*&#x27; will not get expanded</span></span><br><span class="line">thing_right := <span class="variable">$(<span class="built_in">wildcard</span> *.o)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: one two three four</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># * 不要用在变量定义里</span></span><br><span class="line"><span class="comment"># Fails, because $(thing_wrong) is the string &quot;*.o&quot;</span></span><br><span class="line"><span class="section">one: <span class="variable">$(thing_wrong)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果没有匹配到，就会是 *.o 的状态</span></span><br><span class="line"><span class="comment"># Stays as *.o if there are no files that match this pattern :(</span></span><br><span class="line"><span class="section">two: *.o </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Works as you would expect! In this case, it does nothing.</span></span><br><span class="line"><span class="section">three: <span class="variable">$(thing_right)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Same as rule three</span></span><br><span class="line"><span class="section">four: $(wildcard *.o)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>% wildcard。% 有很多丰富的用法，之后碰到了可以看：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://makefiletutorial.com/#static-pattern-rules">Static Pattern Rules</a></li>
+<li><a target="_blank" rel="noopener" href="https://makefiletutorial.com/#pattern-rules">Pattern Rules</a></li>
+<li><a target="_blank" rel="noopener" href="https://makefiletutorial.com/#string-substitution">String Substitution</a></li>
+<li><a target="_blank" rel="noopener" href="https://makefiletutorial.com/#the-vpath-directive">The vpath Directive</a></li>
+</ul>
+</li>
+<li><p>Automatic Variables</p>
+<ul>
+<li>automatic variables ref: <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html">https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html</a></li>
+</ul>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">hey: one two</span></span><br><span class="line">    <span class="comment"># Outputs &quot;hey&quot;, since this is the first target</span></span><br><span class="line">    echo <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Outputs all prerequisites newer than the target</span></span><br><span class="line">    echo <span class="variable">$?</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Outputs all prerequisites</span></span><br><span class="line">    echo <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line">    touch hey</span><br><span class="line"></span><br><span class="line"><span class="section">one:</span></span><br><span class="line">    touch one</span><br><span class="line"></span><br><span class="line"><span class="section">two:</span></span><br><span class="line">    touch two</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="Commands-and-execution"><a href="#Commands-and-execution" class="headerlink" title="Commands and execution"></a>Commands and execution</h2><h3 id="Commands-Echoing-Sliencing"><a href="#Commands-Echoing-Sliencing" class="headerlink" title="Commands Echoing/Sliencing"></a>Commands Echoing/Sliencing</h3><p>在命令之前加 “@”，使得当前的命令不 print。也可以用 -s 在每一行之前加 @</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: </span></span><br><span class="line">    @echo <span class="string">&quot;This make line will not be printed&quot;</span></span><br><span class="line">    echo <span class="string">&quot;But this will&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Go-Makefile-ref"><a href="#Go-Makefile-ref" class="headerlink" title="Go Makefile ref"></a>Go Makefile ref</h1><h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><p>ref： <a target="_blank" rel="noopener" href="https://github.com/protocolbuffers/protobuf/tree/master/examples">https://github.com/protocolbuffers/protobuf/tree/master/examples</a></p>
+<p>Protobuf example 里的 Go Makefile 可以作为参考</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">go:     add_person_go     list_people_go</span></span><br><span class="line"><span class="section">gotest: add_person_gotest list_people_gotest</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm -f add_person_cpp list_people_cpp add_person_java list_people_java add_person_python list_people_python</span><br><span class="line">	rm -f javac_middleman AddPerson*.class ListPeople*.class com/example/tutorial/*.class</span><br><span class="line">	rm -f protoc_middleman addressbook.pb.cc addressbook.pb.h addressbook_pb2.py com/example/tutorial/AddressBookProtos.java</span><br><span class="line">	rm -f *.pyc</span><br><span class="line">	rm -f protoc_middleman_go tutorial/*.pb.go add_person_go list_people_go go.mod go.sum</span><br><span class="line">	rm -f protoc_middleman_dart dart_tutorial/*.pb*.dart</span><br><span class="line">	rmdir dart_tutorial 2&gt;/dev/null || true</span><br><span class="line">	rmdir tutorial 2&gt;/dev/null || true</span><br><span class="line">	rmdir com/example/tutorial 2&gt;/dev/null || true</span><br><span class="line">	rmdir com/example 2&gt;/dev/null || true</span><br><span class="line">	rmdir com 2&gt;/dev/null || true</span><br><span class="line"></span><br><span class="line"><span class="section">protoc_middleman: addressbook.proto</span></span><br><span class="line">	protoc $$PROTO_PATH --cpp_out=. --java_out=. --python_out=. addressbook.proto</span><br><span class="line">	@touch protoc_middleman</span><br><span class="line"></span><br><span class="line"><span class="section">protoc_middleman_go: addressbook.proto</span></span><br><span class="line">	mkdir -p tutorial <span class="comment"># make directory for go package</span></span><br><span class="line">	protoc $$PROTO_PATH --go_out=tutorial addressbook.proto</span><br><span class="line">	@touch protoc_middleman_go</span><br><span class="line"></span><br><span class="line"><span class="section">go_mod:</span></span><br><span class="line">	go mod init github.com/protocolbuffers/protobuf/examples</span><br><span class="line">	go mod tidy</span><br><span class="line"></span><br><span class="line"><span class="section">add_person_go: add_person.go protoc_middleman_go go_mod</span></span><br><span class="line">	go build -o add_person_go add_person.go</span><br><span class="line"></span><br><span class="line"><span class="section">add_person_gotest: add_person_test.go add_person_go go_mod</span></span><br><span class="line">	go test add_person.go add_person_test.go</span><br><span class="line"></span><br><span class="line"><span class="section">list_people_go: list_people.go protoc_middleman_go go_mod</span></span><br><span class="line">	go build -o list_people_go list_people.go</span><br><span class="line"></span><br><span class="line"><span class="section">list_people_gotest: list_people.go list_people_go go_mod</span></span><br><span class="line">	go test list_people.go list_people_test.go</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理文件并 build proto，生成 go 的定义</span></span><br><span class="line">make clean</span><br><span class="line">make go</span><br><span class="line"><span class="comment"># 运行添加 addressbook</span></span><br><span class="line">./add_person_go addressbook.data</span><br><span class="line"><span class="comment"># 运行读取 addressbook</span></span><br><span class="line">./list_people_go addressbook.data</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Yiwei</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://hangzhi.github.io/2021/06/23/makefile-tut/">https://hangzhi.github.io/2021/06/23/makefile-tut/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Go/"># Go</a>
+                    
+                        <a href="/tags/Makefile/"># Makefile</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/06/20/go-ref/">go-ref</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Yiwei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic |</a>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<a id="busuanzi_container_site_pv"><a id="busuanzi_value_site_pv"></a> Views | </a>
+		<a id="busuanzi_container_site_uv"> By <a id="busuanzi_value_site_uv"></a></span>	
+    </div>
+</footer>
+
+
+    </div>
+</body>
+</html>
