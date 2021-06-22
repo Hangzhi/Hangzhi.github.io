@@ -185,7 +185,6 @@
         <div class="post-content">
             <h1 id="Makefiles"><a href="#Makefiles" class="headerlink" title="Makefiles"></a>Makefiles</h1><h1 id="Makefiles-tutorial"><a href="#Makefiles-tutorial" class="headerlink" title="Makefiles tutorial"></a>Makefiles tutorial</h1><p>ref: <a target="_blank" rel="noopener" href="https://makefiletutorial.com/">https://makefiletutorial.com/</a></p>
 <h2 id="Getting-started"><a href="#Getting-started" class="headerlink" title="Getting started"></a>Getting started</h2><p>Makefiles 是用来帮助我们决定在一个项目里那些文件需要被 compiled 的。以如下的 cpp 项目为例，如果任何一个文件的依赖发生了变化，文件都会被重新编译。</p>
-<p><img src="/.io//makefile-tut%5Cdependency.png" alt="dependency"></p>
 <p>除了 Makefiles 之外，其替代品还有还有流行的编译工具比如说 <a target="_blank" rel="noopener" href="https://bazel.build/">Bazel</a>。</p>
 <h2 id="Syntax"><a href="#Syntax" class="headerlink" title="Syntax"></a>Syntax</h2><p>一个 Makefile 会有一些规则，通常看起来是如下的样子。</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">targets: prerequisites</span></span><br><span class="line">   command</span><br><span class="line">   command</span><br><span class="line">   command</span><br></pre></td></tr></table></figure>
