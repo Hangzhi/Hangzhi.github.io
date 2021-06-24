@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Yiwei">
+
+
+
+
+
+<title>使用 WSL2 + Goland 进行 Go 项目（Thanos）开发及测试 | Yiwei</title>
+
+
+
+    <link rel="icon" href="/image/y_favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Yiwei&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Yiwei&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">使用 WSL2 + Goland 进行 Go 项目（Thanos）开发及测试</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Yiwei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 24, 2021&nbsp;&nbsp;13:42:38</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>在 week2 的 meeting 中。Bartek 展示了如何使用 e2e test 进行端到端测试。通过在测试中加 <code>time.Sleep(10 * time.Minute)</code>来在某个映射端口进行测试。但是使用 WSL + GoLand 进行 setup 的过程中发现了很多问题，有关 WSL2 的资料又不是很多，走了很多弯路推到重来，所以在这里做一下记录。以下以 <a target="_blank" rel="noopener" href="https://thanos.io/tip/contributing/community.md/">Thanos</a> 的 Docker 以及本地运行开发为例。</p>
+<h1 id="Go-环境配置"><a href="#Go-环境配置" class="headerlink" title="Go 环境配置"></a>Go 环境配置</h1><h2 id="配置共享目录"><a href="#配置共享目录" class="headerlink" title="配置共享目录"></a>配置共享目录</h2><p>为了方便地在 Windows 和 WSL 之间拷贝文件，以及防止之后运行中出现权限问题，先设置共享目录。在 <code>Windows Terminal</code> 中输入 wsl，进入 WSL 系统，可以看到当前的目录为 <code>mnt/c/</code> ，这里就是 WSL 对应于 windows 下的 <code>[C:\](https://thanos.io/tip/contributing/community.md/)</code> 的挂载分区。</p>
+<ol>
+<li>在 Windows 中新建文件夹 public，我们之后将把 public 作为我们的 GOPATH。</li>
+<li>在 WSL 中添加软连接。<code>ln -s /mnt/c/public ~/public</code> 。</li>
+</ol>
+<h2 id="WSL-上安装-Go"><a href="#WSL-上安装-Go" class="headerlink" title="WSL 上安装 Go"></a>WSL 上安装 Go</h2><ol>
+<li><p>wsl 安装：这个 <a target="_blank" rel="noopener" href="https://www.notion.so/432436d570b89cab172dcf2894465753">gist</a> 可以参考</p>
+<p>除此之外我还根据 Thanos 的 <a target="_blank" rel="noopener" href="https://github.com/thanos-io/thanos/blob/a9cb4ecadfc870335c1f7fa4abe5f70705621c39/CONTRIBUTING.md#installing-project-locally-in-your-machine">contributing.md</a> 设置了 GOBIN GOPATH GOPROXY</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export GOBIN=<span class="string">&quot;$HOME/public/Repos/thanos/.bin&quot;</span></span><br><span class="line">export GOPATH=<span class="string">&quot;$HOME/public/Repos/thanosgopath&quot;</span></span><br><span class="line">export GOPROXY=<span class="string">&quot;https://proxy.golang.org&quot;</span></span><br><span class="line">export PATH=<span class="string">&quot;$GOBIN:$PATH&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>windows 端安装 Go （不确定这个是否必须，但我之前就装了）</p>
+</li>
+</ol>
+<h2 id="GOPATH-配置"><a href="#GOPATH-配置" class="headerlink" title="GOPATH 配置"></a>GOPATH 配置</h2><ol>
+<li>Windows：在环境变量配置中将用户变量中的 GOPATH 改为 <code>C:\public\Repos\thanosgopath</code> 。</li>
+<li>WSL：<code>GOPATH=&quot;$HOME/public/Repos/thanosgopath&quot;</code> 。</li>
+</ol>
+<h2 id="项目下载和-WSL-中-build-运行"><a href="#项目下载和-WSL-中-build-运行" class="headerlink" title="项目下载和 WSL 中 build 运行"></a>项目下载和 WSL 中 build 运行</h2><ol>
+<li>参考 Thanos 的 <a target="_blank" rel="noopener" href="https://github.com/thanos-io/thanos/blob/a9cb4ecadfc870335c1f7fa4abe5f70705621c39/CONTRIBUTING.md#pull-request-process">doc</a></li>
+</ol>
+<h1 id="GoLand-的安装和配置"><a href="#GoLand-的安装和配置" class="headerlink" title="GoLand 的安装和配置"></a>GoLand 的安装和配置</h1><p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.jetbrains.com/go/2021/05/05/compile-and-run-go-code-using-wsl-2-and-goland/">https://blog.jetbrains.com/go/2021/05/05/compile-and-run-go-code-using-wsl-2-and-goland/</a></li>
+<li><a target="_blank" rel="noopener" href="https://youtrack.jetbrains.com/issue/GO-4377">https://youtrack.jetbrains.com/issue/GO-4377</a></li>
+</ul>
+<h2 id="安装-GoLand"><a href="#安装-GoLand" class="headerlink" title="安装 GoLand"></a>安装 GoLand</h2><ul>
+<li>由于我们这里使用 WSL2，为了使用 GoLand 的 <code>Run Target</code> 的新特性，需要安装 GoLand 2021.1 Beta 及以上的版本。</li>
+</ul>
+<h2 id="打开-Windows-路径下的项目"><a href="#打开-Windows-路径下的项目" class="headerlink" title="打开 Windows 路径下的项目"></a>打开 Windows 路径下的项目</h2><p>在控制变量之后发现，当打开的是 WSL 目录下的项目，之后编译可能会出现无法操作 <code>\\wsl$</code> 目录的问题。</p>
+<h2 id="配置-GO-设置"><a href="#配置-GO-设置" class="headerlink" title="配置 GO 设置"></a>配置 GO 设置</h2><ul>
+<li>File - Setting - Go<ul>
+<li>GOROOT ：添加 <code>\\wsl$\Ubuntu\usr\local\go</code> WSL 的 GOROOT。</li>
+<li>GOPATH ：选中 <code>Use GOPATH that&#39;s defined in system environment</code> ，这将使用 Windows 系统设置中的变量。</li>
+</ul>
+</li>
+</ul>
+<h2 id="添加-Target："><a href="#添加-Target：" class="headerlink" title="添加 Target："></a>添加 Target：</h2><ul>
+<li>Run - Manage Targets - Add Target On - WSL</li>
+<li>Add language runtime。<ul>
+<li>Go Executable :  WSL 中 Go 的可执行文件的路径，为了找到这个路径，在 WSL 中使用 <code>whereis go</code> ，可以看到<ul>
+<li><code>go: /usr/local/go /mnt/c/Program Files/Go/bin/go.exe /usr/local/go/bin/go</code></li>
+<li>第一个是 GOROOT, 第二个是 Windows 所在可执行文件的位置，第三个是 WSL 可执行文件的位置，<code>/usr/local/go/bin/go</code> 是要填在这里的。</li>
+</ul>
+</li>
+<li>GOPATH：使用 <code>go env</code> 进行查询填入。</li>
+<li>Version：可以缺省</li>
+</ul>
+</li>
+</ul>
+<h2 id="Run-Debug-Configurations-Edit-Configurations"><a href="#Run-Debug-Configurations-Edit-Configurations" class="headerlink" title="Run/Debug Configurations - Edit Configurations"></a>Run/Debug Configurations - Edit Configurations</h2><ul>
+<li><p>Add - Go Build</p>
+<ul>
+<li>Run on： 之前的 target</li>
+<li>check：Build on remote target</li>
+</ul>
+<p><img src="/.io//wsl2GolandThanosDev%5CUntitled.png" alt="Untitled.png"></p>
+</li>
+</ul>
+<h2 id="耐心等待"><a href="#耐心等待" class="headerlink" title="耐心等待"></a>耐心等待</h2><p> Thanos 依赖较多，GoLand 会自动识别到 go.mod 文件，下载和 indexing 的时间都比较久，在下载依赖和和 indexing 的过程中，可能会出现 cannot find package 的问题，这并不是配置问题，只是需要等待。完成下载和 indexing 之后，可以看到项目的 Go Modules</p>
+<p>![Untitled%201.png](wsl2GolandThanosDev\Untitled 1.png)</p>
+<h1 id="End-to-End-Test"><a href="#End-to-End-Test" class="headerlink" title="End to End Test"></a>End to End Test</h1><p>GoLand 会运行识别到可独立运行的 test 函数和文件，点击在行号旁边的小箭头运行 test。要注意 run configuration 中的配置，默认的配置是 Run on local ，也没有 check build on remote target。</p>
+<p>以 <code>TestRulesAPI_Fanout</code> 为例，会在 Run 中看到如下提示。如果 GOROOT 出现了其他的设置，或者可执行文件使用的是 go.exe，都需要检查是配置是否出现了问题。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GOROOT=null #gosetup</span><br><span class="line">GOPATH=/mnt/c/public/Repos/thanosgopath #gosetup</span><br><span class="line">/usr/local/<span class="keyword">go</span>/bin/<span class="keyword">go</span> test -c -o /mnt/c/Userst .... </span><br><span class="line">/usr/local/<span class="keyword">go</span>/bin/<span class="keyword">go</span> tool test2json -t /mnt/c/Users ...</span><br><span class="line">=== RUN   TestRulesAPI_Fanout</span><br><span class="line">=== PAUSE TestRulesAPI_Fanout</span><br></pre></td></tr></table></figure>
+
+<h1 id="Docker-WSL2"><a href="#Docker-WSL2" class="headerlink" title="Docker + WSL2"></a>Docker + WSL2</h1><p>为了之后开发的方便，希望能够使用 docker Thanos。此处以<code>make docker</code> 及 <code>make e2e-test</code> 执行成功为例，来说一些碰到的的问题以及可行的解决方法。 WSL2 上的 docker 使用也会遇到一些之前没有碰到过的问题。</p>
+<h2 id="Docker-安装流程："><a href="#Docker-安装流程：" class="headerlink" title="Docker 安装流程："></a>Docker 安装流程：</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/143156163">https://zhuanlan.zhihu.com/p/143156163</a></li>
+</ol>
+<h2 id="出现的问题"><a href="#出现的问题" class="headerlink" title="出现的问题"></a>出现的问题</h2><h3 id="apt-get-update-failed"><a href="#apt-get-update-failed" class="headerlink" title="apt-get update failed"></a>apt-get update failed</h3><p>参考： <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/60269422/windows10-wsl2-ubuntu-debian-apt-get-update-failed-no-network">https://stackoverflow.com/questions/60269422/windows10-wsl2-ubuntu-debian-apt-get-update-failed-no-network</a></p>
+<ul>
+<li>sudo unlink /etc/resolv.conf</li>
+<li>新建一个 /etc/resolv.conf</li>
+<li>写入 <code>10.8.0.1</code> （使用了 vpn，常规的 8.8.8.8 也无法解决问题）</li>
+</ul>
+<h3 id="docker-pull-找不到-Thanos-latest-的-image"><a href="#docker-pull-找不到-Thanos-latest-的-image" class="headerlink" title="docker pull 找不到 Thanos:latest 的 image"></a>docker pull 找不到 Thanos:latest 的 image</h3><ul>
+<li>去 dockerhub 找到最新的 Thanos image，复制 pull command <code>docker pull thanosio/thanos:main-2021-06-23-d8a794ba</code></li>
+</ul>
+<h3 id="无法启动-docker"><a href="#无法启动-docker" class="headerlink" title="无法启动 docker"></a>无法启动 docker</h3><p>报错信息：Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</p>
+<ul>
+<li>在一个 terminal 运行 <code>sudo dockered</code> ，这是对我来说在 WSL2 上唯一有用的方法。</li>
+<li>新开一个 terminal 进行想要做的操作。</li>
+</ul>
+<h3 id="make-Permission-denied-error-127"><a href="#make-Permission-denied-error-127" class="headerlink" title="make - Permission denied error 127"></a>make - Permission denied error 127</h3><p>在 make 的过程中</p>
+<ul>
+<li>权限问题： 尝试 <code>sudo</code>  或者 <code>chmod 777 -R finename</code></li>
+<li>其他：定位到报错的行，查看是否是有些文件是否真的存在，有可能是没有正确安装或者环境变量配置错误。</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Yiwei</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://hangzhi.github.io/2021/06/24/wsl2GolandThanosDev/">https://hangzhi.github.io/2021/06/24/wsl2GolandThanosDev/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Go/"># Go</a>
+                    
+                        <a href="/tags/WSL/"># WSL</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/06/23/protobuf/">Protobuf</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Yiwei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic |</a>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<a id="busuanzi_container_site_pv"><a id="busuanzi_value_site_pv"></a> Views | </a>
+		<a id="busuanzi_container_site_uv"> By <a id="busuanzi_value_site_uv"></a></span>	
+    </div>
+</footer>
+
+
+    </div>
+</body>
+</html>
