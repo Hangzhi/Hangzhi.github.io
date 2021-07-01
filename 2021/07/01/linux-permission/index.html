@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Yiwei">
+
+
+
+
+
+<title>Linux 文件权限，chmod，chown, chattr | Yiwei</title>
+
+
+
+    <link rel="icon" href="/image/y_favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Yiwei&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Yiwei&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Linux 文件权限，chmod，chown, chattr</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Yiwei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 1, 2021&nbsp;&nbsp;11:17:42</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>在运行的 Thanos 的时候遇到了如下问题，为了解决这个问题，做了重装 gcc 等尝试，未成功。最后查询学习了一系列有关 Linux 权限的知识，解决了这个问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># runtime/cgo </span></span><br><span class="line">cc1: error: /usr/<span class="built_in">local</span>/include/x86_64-linux-gnu:</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Linux-文件权限"><a href="#Linux-文件权限" class="headerlink" title="Linux 文件权限"></a>Linux 文件权限</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 使用 ls -l 查看权限</span></span><br><span class="line">ls -l</span><br><span class="line"></span><br><span class="line">drwxr-xr-x   2 root root 65536 Jun 30 18:48 bin</span><br><span class="line">drwxr-xr-x   2 root root  4096 Jun 23 17:52 config</span><br><span class="line">drwxr-xr-x   2 root root  4096 Apr 15  2020 games</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表的前十个字符表示文件的权限状况。第一个字符代表文件的类型，</span></span><br><span class="line"><span class="comment"># -：普通文件</span></span><br><span class="line"><span class="comment"># d：文件夹</span></span><br><span class="line"><span class="comment"># 剩下的九个字符，叫做文件模式，代表文件的所有者，文件组所有者和其他人的 </span></span><br><span class="line"><span class="comment"># 读（w-4），写（r-2）和执行（x-1）权限</span></span><br><span class="line"><span class="comment"># 通过4、2、1的组合，得到以下几种权限：0（没有权限）；4（读取权限）；5（4+1 | 读取+执行）；6（4+2 | 读取+写入）；7（4+2+1 | 读取+写入+执行）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. chmod 更改权限</span></span><br><span class="line"><span class="comment"># chmod [-cfvR] [--help] [--version] mode file...</span></span><br><span class="line"><span class="comment"># mode ：[ugoa...][[+-=][rwxX]...][,...]</span></span><br><span class="line"><span class="comment"># [ugoa...] ：文件所有者；文件所有者群组；其他人；全部人</span></span><br><span class="line"><span class="comment"># [+-=][rwxX]：指定或者添加删除相应的权限；</span></span><br><span class="line"><span class="comment"># chmod abc file: 使用三个字母代表相应的权限</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 但当我对于文件进行 chmod 操作的时候却出现了如下报错，这就要涉及到文件的属性。</span></span><br><span class="line">sudo su</span><br><span class="line">chmod 777 include </span><br><span class="line"><span class="comment"># chmod: changing permissions of &#x27;include&#x27;: Operation not permitted</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. chown </span></span><br><span class="line"><span class="comment"># chown [-cfhvR] [--help] [--version]user[:group] file </span></span><br><span class="line"><span class="comment"># user : 新的文件拥有者的使用者 ID</span></span><br><span class="line"><span class="comment"># -R : 处理指定目录以及其子目录下的所有文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定文件所有者为 root</span></span><br><span class="line">chown root /var/run/httpd.pid</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定目录及其子目录的所有文件所有者为 runoob:runoobgroup</span></span><br><span class="line">chown -R runoob:runoobgroup *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 隐藏属性</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.1 lsattr</span></span><br><span class="line"><span class="comment"># lsattr [-adlRvV][file/directory...]</span></span><br><span class="line"><span class="comment"># -a 　显示所有文件和目录，包括以&quot;.&quot;为名称开头字符的额外内建，现行目录&quot;.&quot;与上层目录&quot;..&quot;。</span></span><br><span class="line"><span class="comment"># -d 　显示，目录名称，而非其内容。</span></span><br><span class="line"><span class="comment"># -R 　递归处理，将指定目录下的所有文件及子目录一并处理。</span></span><br><span class="line"></span><br><span class="line">lsattr <span class="built_in">local</span></span><br><span class="line">--------------e----- <span class="built_in">local</span>/src</span><br><span class="line">----i---------e----- <span class="built_in">local</span>/include</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以看到 include 目录的属性里又一个 i ，表示 immutable，这应当就是我们无法对 include 进行权限操作的原因。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.2 chattr</span></span><br><span class="line"><span class="comment"># chattr [+-][ei...] filename 可以该表文件和目录的隐藏属性。</span></span><br><span class="line">chattr -i <span class="built_in">local</span>/include</span><br><span class="line">lsattr</span><br><span class="line">--------------e----- ./src</span><br><span class="line">--------------e----- ./include</span><br><span class="line"><span class="comment"># 完成这些操作，就能看到文件可以在 root 下进行权限操作了。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li>i e 属性的解释：  <a target="_blank" rel="noopener" href="https://blog.systemctl.top/2017/2017-04-14_something-about-lsattr_-i_-e/">https://blog.systemctl.top/2017/2017-04-14_something-about-lsattr_-i_-e/</a></li>
+<li>Linux command reference： <a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-lsattr.html">https://www.runoob.com/linux/linux-comm-lsattr.html</a></li>
+<li>文件权限总结： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/chenqionghe/p/10407336.html">https://www.cnblogs.com/chenqionghe/p/10407336.html</a></li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Yiwei</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://hangzhi.github.io/2021/07/01/linux-permission/">https://hangzhi.github.io/2021/07/01/linux-permission/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Linux/"># Linux</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/07/01/soc-projects/">安利 | 除了大厂和实验室板砖, 准程序员还能做什么（开源实习详细时间线和申请建议）</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Yiwei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic |</a>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<a id="busuanzi_container_site_pv"><a id="busuanzi_value_site_pv"></a> Views | </a>
+		<a id="busuanzi_container_site_uv"> By <a id="busuanzi_value_site_uv"></a></span>	
+    </div>
+</footer>
+
+
+    </div>
+</body>
+</html>
