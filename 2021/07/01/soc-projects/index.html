@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Yiwei">
+
+
+
+
+
+<title>除了大厂和实验室搬砖，准程序员们还能做些什么？ | Yiwei</title>
+
+
+
+    <link rel="icon" href="/image/y_favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Yiwei&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Yiwei&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">除了大厂和实验室搬砖，准程序员们还能做些什么？</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Yiwei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 1, 2021&nbsp;&nbsp;8:30:23</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>不论是想利用假期积累一些真实软件开发经验，或者只是回馈开源社区，开源实习都是不错的选择。</p>
+<p>开源项目是协作构建的，它意味着每个人都有使用、复制、研究、更改和改进项目的自由。开源贡献者们围绕着一个项目协同工作，并创造了一个有趣的社区。</p>
+<p>对于软件世界的新手来说，参与开源项目的经验是十分宝贵的，你<strong>不仅可以深入了解某一技术、得到该领域大牛的指导</strong>，还能够<strong>让未来雇主看到你在公开场合合作的经验</strong>。</p>
+<p>眼下，不少组织机构都推出了自己的开源实习项目，一起来看看吧。</p>
+<p><strong>重点！！！：</strong>如果是在 2021 年看到的这篇文章，估计文中的大部分项目只能考虑下一年参与了。但是，有例外！<strong>今年的 <a href="http://link.zhihu.com/?target=https://lfx.linuxfoundation.org/tools/mentorship/">Linux Foundation Mentorship Program</a></strong> <strong>Fall Term 将于 7 月 15 日开始申请。除了在校学生，全职工程师也可以 part-time 参与，欢迎大家参与进来！</strong></p>
+<h1 id="Linux-Foundation-Mentorship-Program"><a href="#Linux-Foundation-Mentorship-Program" class="headerlink" title="Linux Foundation Mentorship Program"></a>Linux Foundation Mentorship Program</h1><p><img src="https://pic3.zhimg.com/80/v2-24a001d3eabed2fdc5eb0d8c8d587242_720w.jpg" alt="img"></p>
+<p><a href="http://link.zhihu.com/?target=https://lfx.linuxfoundation.org/tools/mentorship/">https://lfx.linuxfoundation.org/tools/mentorship/</a></p>
+<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a><strong>项目简介</strong></h2><p>Linux 基金会导师计划旨在帮助首次参与开源贡献的开发人员掌握必要的技能和资源，项目涉及Linux内核、低频网络、开放式高性能计算、超级账本、图形语言等多项技术。</p>
+<h2 id="申请时间"><a href="#申请时间" class="headerlink" title="申请时间"></a><strong>申请时间</strong></h2><p>LXM有<strong>春季、夏季和秋季三轮实习</strong>，均有全职和兼职的方式可以选择，时长分别为3个月和6个月，分别从每年的3月、6月和9月开始。</p>
+<p><strong>申请时间一般从实习期开始前6周开放，实习开始前2周截止</strong>。具体时间线可参考下表</p>
+<p><img src="https://pic3.zhimg.com/80/v2-3c4e19d98c6c92bffd11c208a008569e_720w.jpg" alt="img"></p>
+<h2 id="申请心得"><a href="#申请心得" class="headerlink" title="申请心得"></a><strong>申请心得</strong></h2><p>LXM由Linux基金会主办，项目会偏 infra，有3 个月全职实习或者 6 个月兼职</p>
+<h1 id="Google-Summer-of-Code-谷歌编程之夏"><a href="#Google-Summer-of-Code-谷歌编程之夏" class="headerlink" title="Google Summer of Code 谷歌编程之夏"></a>Google Summer of Code 谷歌编程之夏</h1><p><img src="https://pic3.zhimg.com/80/v2-5ce718420ac76d73fc6afc0a6af3cae2_720w.jpg" alt="img"></p>
+<p><a href="http://link.zhihu.com/?target=https://summerofcode.withgoogle.com/">https://summerofcode.withgoogle.com/</a></p>
+<h2 id="项目简介-1"><a href="#项目简介-1" class="headerlink" title="项目简介"></a>项目简介</h2><p>谷歌编程之夏（GSoC）是谷歌公司针对学生主办的线上暑期开源实习项目，学生可以在导师的指导下为一个开源项目作出贡献，并取得报酬。这一项目的特点是<strong>参与的组织多、项目也多</strong>。</p>
+<h2 id="如何申请"><a href="#如何申请" class="headerlink" title="如何申请"></a>如何申请</h2><p>GSoC 会在<strong>每年2月末公布开源社区和组织列表</strong>，申请者可以从列表中挑选出自己感兴趣的项目进行了解。<strong>3月至4月</strong>，申请者可以<strong>正式提交申请</strong>，每个人申请的<strong>上限是5个项目</strong>。GSoC 会在5 月份公布入选的学生名单，并给大家分配导师，由导师指导学生的工作，并评估学生的工作是否达到要求。</p>
+<h2 id="申请时间-1"><a href="#申请时间-1" class="headerlink" title="申请时间"></a>申请时间</h2><p>尽管GSoC是一个暑期项目，但一些开源项目是持续性的，感兴趣的同学可以<strong>在前一年的年底</strong>就开始关注这些项目，并<strong>在社区中作出持续性的贡献</strong>。</p>
+<p><strong>申请心得</strong></p>
+<p>GSoC 在世界范围内都很受认可，据一些同学反馈，有这个项目在简历上，之后会很好过简历关。</p>
+<h1 id="Outreachy"><a href="#Outreachy" class="headerlink" title="Outreachy"></a>Outreachy</h1><p><img src="https://pic3.zhimg.com/80/v2-a425a2f2dad7ceebea5a815fb77e82d6_720w.jpg" alt="img"></p>
+<p><a href="http://link.zhihu.com/?target=https://www.outreachy.org/">https://www.outreachy.org/</a></p>
+<h2 id="项目简介-2"><a href="#项目简介-2" class="headerlink" title="项目简介"></a>项目简介</h2><p>Outreachy是一个<strong>有偿的远程开源实习项目</strong>，实习期为三个月，开源实习生可以和经验丰富的导师一起完成包括编程、用户体验、文档、插图、图形设计、数据科学、项目营销、用户宣传或社区活动策划等类型的项目，并获得6000美元的实习津贴。</p>
+<h2 id="申请时间-2"><a href="#申请时间-2" class="headerlink" title="申请时间"></a>申请时间</h2><p>Outreachy有夏季和冬季两轮实习，申请时间线可以参考以下时间表</p>
+<p><img src="https://pic3.zhimg.com/80/v2-a47c3699ca3b4fb5ec52b45d3218d08a_720w.jpg" alt="img"></p>
+<h2 id="如何申请-1"><a href="#如何申请-1" class="headerlink" title="如何申请"></a>如何申请</h2><p>Outreachy对学生有严格的资格限制，申请前一定要确保自己具有资格。此外，Outreachy的申请过程比较长，如果有兴趣的话<strong>至少要在截止日期前2至3周开始申请</strong>。</p>
+<p>申请时你可以在Outreachy提供的项目中<strong>挑选1-2个</strong>感兴趣的，通过社区网页了解项目详情，还可以通过社区聊天频道和导师联系信息询问有关项目的问题。</p>
+<p>每个项目都会有一组任务让你去完成，Outreachy看重你<strong>与导师的沟通、提出问题的能力、并希望申请者能够以稳定的速度做出小贡献</strong>。</p>
+<p>只有作出<strong>至少一项贡献</strong>，并<strong>在Outreachy网站上记录该贡献</strong>，并<strong>提交最终申请</strong>的申请人才有资格被接纳为实习生。</p>
+<h2 id="申请心得-1"><a href="#申请心得-1" class="headerlink" title="申请心得"></a>申请心得</h2><p>Outreachy鼓励在受到所在技术行业代表性不足影响的人群来参与。2021年 summer term 今年总共3000 +申请，有700 余份申请通过初选，竞争60多个实习生职位。</p>
+<h2 id="MLH-Fellowship"><a href="#MLH-Fellowship" class="headerlink" title="MLH Fellowship"></a>MLH Fellowship</h2><p><img src="https://pic4.zhimg.com/80/v2-81f21c33536caf5f92c751b3ce2a92c3_720w.jpg" alt="img"></p>
+<p><a href="http://link.zhihu.com/?target=https://fellowship.mlh.io/programs/open-source">https://fellowship.mlh.io/programs/open-source</a></p>
+<h2 id="项目简介-3"><a href="#项目简介-3" class="headerlink" title="项目简介"></a>项目简介</h2><p>MLH成立于 2013 年，是全球最大的早期职业开发人员社区。该项目为各年级学生提供带有奖学金的远程项目实战课程，<strong>课程跨越多种语言和框架，将根据申请人的兴趣和经验进行匹配</strong>。</p>
+<h2 id="如何申请-2"><a href="#如何申请-2" class="headerlink" title="如何申请"></a>如何申请</h2><p>MLH Fellowship要求申请者<strong>精通至少一种编程语言</strong>并<strong>具备使用该语言处理各种项目的经验</strong>。此外，尽管该项目对申请者的所在地和国籍没有要求，但申请者应当<strong>能够熟练使用英语工作交流</strong>，并<strong>确保能在所处时区的工作日完成每周30小时以上的工作</strong>。</p>
+<p>在申请过程中，申请人首先完成一份<strong>书面申请</strong>，描述自己的申请资格、开发经验以及想要参与该计划的原因。通过书面这一关的申请人将被邀请参加一个类似大学招生的<strong>简短视频面试</strong>。最后，通过初步面试的申请人将被邀请参加更<strong>详细的技术面试</strong>，技术面试的重点是评估申请者提交的一段代码。</p>
+<h2 id="申请时间-3"><a href="#申请时间-3" class="headerlink" title="申请时间"></a>申请时间</h2><p>MLH Fellowship每年有多批次项目开放，申请者在<strong>一个批次中只能申请一个项目</strong>。</p>
+<h2 id="申请心得-2"><a href="#申请心得-2" class="headerlink" title="申请心得"></a>申请心得</h2><p>申请的时候要填code sample的链接，审核申请的人是会比较仔细地看所给的code的。</p>
+<h1 id="腾讯-–-犀牛鸟开源人才培养计划"><a href="#腾讯-–-犀牛鸟开源人才培养计划" class="headerlink" title="腾讯 – 犀牛鸟开源人才培养计划"></a>腾讯 – 犀牛鸟开源人才培养计划</h1><p><img src="https://pic4.zhimg.com/80/v2-91fdac2ea250262aaf88e1eda92fd13b_720w.jpg" alt="img"></p>
+<p><a href="http://link.zhihu.com/?target=https://opensource.tencent.com/summer-of-code">https://opensource.tencent.com/summer-of-code</a></p>
+<h2 id="项目简介-4"><a href="#项目简介-4" class="headerlink" title="项目简介"></a>项目简介</h2><p>腾讯犀牛鸟开源人才培养计划是今年5月刚刚推出的开源实习项目，涉及到了云原生、微服务、容器、AI、大数据、前端、物联网/边缘计算等多项技术热点。</p>
+<h2 id="如何申请-3"><a href="#如何申请-3" class="headerlink" title="如何申请"></a>如何申请</h2><p>报名的同学<strong>都可以参加线上开源系列课程</strong>，学习开源知识。</p>
+<p>想要参加项目实战的同学，则可以在腾讯提供的项目中<strong>选择1至3个</strong>，按照官方要求的撰写模板<strong>提交项目计划书</strong>。最终入选的学生将在导师的一对一指导下，利用暑假<strong>开展编程实战</strong>，并有机会获得腾讯开源贡献者证书。</p>
+<h2 id="申请时间-4"><a href="#申请时间-4" class="headerlink" title="申请时间"></a>申请时间</h2><p>暑期，申请时间线可以参考以下时间表</p>
+<p><img src="https://pic2.zhimg.com/80/v2-9fb0969b8e713c958292096f22d10eb9_720w.jpg" alt="img"></p>
+<h2 id="申请心得-3"><a href="#申请心得-3" class="headerlink" title="申请心得"></a>申请心得</h2><p>腾讯最近挺看重开源的，整个内部都在搞开源共建。犀牛鸟是今年开的<strong>新项目</strong>，宣传较少，知道的人也较少，竞争应当不会太激烈。</p>
+<h1 id="开源软件供应链点亮计划"><a href="#开源软件供应链点亮计划" class="headerlink" title="开源软件供应链点亮计划"></a>开源软件供应链点亮计划</h1><p><img src="https://pic2.zhimg.com/80/v2-ede87edc5d85340b4d34a658d859dd69_720w.jpg" alt="img"></p>
+<p><a href="http://link.zhihu.com/?target=https://summer.iscas.ac.cn/%23/homepage?lang=chi">https://summer.iscas.ac.cn/#/homepage?lang=chi</a></p>
+<h2 id="项目简介-5"><a href="#项目简介-5" class="headerlink" title="项目简介"></a>项目简介</h2><p>开源软件供应链点亮计划是中国科学院软件研究所和openEuler联合主办的暑期开源项目，鼓励<strong>18岁以上的学生</strong>参与开源软件社区建设，将为申请者提供<strong>一对一的导师指导</strong>，并根据项目难度提供人民币6000至12000元的<strong>项目资金</strong>。</p>
+<h2 id="如何申请-4"><a href="#如何申请-4" class="headerlink" title="如何申请"></a>如何申请</h2><p>尽管开源软件供应链点亮计划是一个暑期项目，但申请者每年4月就可以在官网的项目列表中## <strong>挑选自己感兴趣的课题</strong>并<strong>和导师进行沟通</strong>。</p>
+<p>正式申请开始后，申请者需要提交项目计划书，每人<strong>最多可以申请三个项目</strong>，但入选后只会根据自己申请时的优先级分配一个。</p>
+<h2 id="申请时间-5"><a href="#申请时间-5" class="headerlink" title="申请时间"></a>申请时间</h2><p>每年项目列表的公布时间在4月左右，5月下旬至6月中旬开放申请，7月入选者将正式开始实习。具体的时间线可以参考以下时间表</p>
+<p><img src="https://pic4.zhimg.com/80/v2-ea5c59ef69834156c1b0adff857ba063_720w.jpg" alt="img"></p>
+<p>参考资料：</p>
+<ul>
+<li>WomenInTech 豆瓣小组推文：<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/gdi6lJfCagEHNKH8IJ1sZw">除了去大厂搬砖，假期还有这些开源实习可以选择</a></li>
+<li>GSoC 往届国区参与者的资料： <a target="_blank" rel="noopener" href="https://github.com/gsoc-cn/gsoc-cn">https://github.com/gsoc-cn/gsoc-cn</a></li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Yiwei</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://hangzhi.github.io/2021/07/01/soc-projects/">https://hangzhi.github.io/2021/07/01/soc-projects/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/opens-source/"># opens-source</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/06/24/wsl2GolandThanosDev/">使用 WSL2 + Goland 进行 Go 项目（Thanos）开发及测试</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Yiwei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic |</a>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<a id="busuanzi_container_site_pv"><a id="busuanzi_value_site_pv"></a> Views | </a>
+		<a id="busuanzi_container_site_uv"> By <a id="busuanzi_value_site_uv"></a></span>	
+    </div>
+</footer>
+
+
+    </div>
+</body>
+</html>
