@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Yiwei">
+
+
+
+
+
+<title>Proxy Config Memo | Yiwei</title>
+
+
+
+    <link rel="icon" href="/image/y_favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Yiwei&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Yiwei&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Proxy Config Memo</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Yiwei</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 7, 2021&nbsp;&nbsp;17:09:49</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>此处用来记录 Proxy 的过程中可能会遇到的问题。</p>
+<h1 id="Failed-to-connect-to-github-com-port-443-Connection-timed-out-but-valid-connection-in-browser-Windows"><a href="#Failed-to-connect-to-github-com-port-443-Connection-timed-out-but-valid-connection-in-browser-Windows" class="headerlink" title="Failed to connect to github.com port 443: Connection timed out, but valid connection in browser - Windows"></a>Failed to connect to github.com port 443: Connection timed out, but valid connection in browser - Windows</h1><h2 id="git-config-unset-proxy"><a href="#git-config-unset-proxy" class="headerlink" title="git config unset proxy"></a>git config unset proxy</h2><p>This method don’t work</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-config-proxy"><a href="#git-config-proxy" class="headerlink" title="git config proxy"></a>git config proxy</h2><p>This method don’t work</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+
+<h2 id="edit-host-file"><a href="#edit-host-file" class="headerlink" title="edit host file"></a>edit host file</h2><p>The addresses are what I copied from the websites. You should copy your own. </p>
+<ol>
+<li><p>open <a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/">https://github.com.ipaddress.com/</a></p>
+<ol>
+<li>copy <code>IP Address</code>:   140.82.113.4</li>
+</ol>
+</li>
+<li><p>open <a target="_blank" rel="noopener" href="https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo">https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo</a> </p>
+<ol>
+<li>copy  <code>IP Address</code>:  199.232.5.194</li>
+</ol>
+</li>
+<li><p>open <a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/assets-cdn.github.com">https://github.com.ipaddress.com/assets-cdn.github.com</a></p>
+<ol>
+<li>copy the four IP Addresses in <code>assets-cdn.github.com resolves to the following 4 IPv4 addresses:</code><ul>
+<li><a target="_blank" rel="noopener" href="https://www.ipaddress.com/ipv4/185.199.108.153">185.199.108.153</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ipaddress.com/ipv4/185.199.109.153">185.199.109.153</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ipaddress.com/ipv4/185.199.110.153">185.199.110.153</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ipaddress.com/ipv4/185.199.111.153">185.199.111.153</a></li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>Edit host file:</p>
+<ol>
+<li><p>open <code>host</code> file in C:\Windows\System32\drivers\etc</p>
+</li>
+<li><p>edit the file with the IP Addresses we copied:</p>
+<ol>
+<li><pre><code class="shell">140.82.113.4 github.com 
+199.232.5.194 github.global.ssl.fastly.net
+185.199.108.153 assets-cdn.github.com
+185.199.109.153 assets-cdn.github.com
+185.199.110.153 assets-cdn.github.com
+185.199.111.153 assets-cdn.github.com
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. Flush DNS in Windows</span><br><span class="line"></span><br><span class="line">   1. Open a terminal (PowerShell for example)</span><br><span class="line"></span><br><span class="line">   2. &#96;&#96;&#96;shell</span><br><span class="line">      $ ipconfig &#x2F;flushdns</span><br><span class="line">      </span><br><span class="line">      Windows IP Configuration</span><br><span class="line">      Successfully flushed the DNS Resolver Cache.</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>Unset git proxies (Optional)</p>
+<p>If it still doesn’t work, you could try: </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Yiwei</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://hangzhi.github.io/2021/07/07/proxy-config/">https://hangzhi.github.io/2021/07/07/proxy-config/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/Proxy/"># Proxy</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2021/07/01/grpc/">gRPC review</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Yiwei | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic |</a>
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+		<a id="busuanzi_container_site_pv"><a id="busuanzi_value_site_pv"></a> Views | </a>
+		<a id="busuanzi_container_site_uv"> By <a id="busuanzi_value_site_uv"></a></span>	
+    </div>
+</footer>
+
+
+    </div>
+</body>
+</html>
