@@ -194,7 +194,7 @@
 <ol>
 <li><p>open <a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/">https://github.com.ipaddress.com/</a></p>
 <ol>
-<li>copy <code>IP Address</code>:   140.82.113.4</li>
+<li>copy <code>IP Address</code>:   140.82.114.4</li>
 </ol>
 </li>
 <li><p>open <a target="_blank" rel="noopener" href="https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo">https://fastly.net.ipaddress.com/github.global.ssl.fastly.net#ipinfo</a> </p>
@@ -218,17 +218,18 @@
 <li><p>open <code>host</code> file in C:\Windows\System32\drivers\etc</p>
 </li>
 <li><p>edit the file with the IP Addresses we copied:</p>
-<ol>
-<li><pre><code class="shell">140.82.113.4 github.com 
-199.232.5.194 github.global.ssl.fastly.net
-185.199.108.153 assets-cdn.github.com
-185.199.109.153 assets-cdn.github.com
-185.199.110.153 assets-cdn.github.com
-185.199.111.153 assets-cdn.github.com
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. Flush DNS in Windows</span><br><span class="line"></span><br><span class="line">   1. Open a terminal (PowerShell for example)</span><br><span class="line"></span><br><span class="line">   2. &#96;&#96;&#96;shell</span><br><span class="line">      $ ipconfig &#x2F;flushdns</span><br><span class="line">      </span><br><span class="line">      Windows IP Configuration</span><br><span class="line">      Successfully flushed the DNS Resolver Cache.</span><br></pre></td></tr></table></figure>
-</code></pre>
+   <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">140.82.114.4 github.com </span><br><span class="line">199.232.5.194 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">185.199.110.153 assets-cdn.github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br></pre></td></tr></table></figure>
+
+
 </li>
 </ol>
+</li>
+</ol>
+<ol start="3">
+<li><p>Flush DNS in Windows</p>
+<ol>
+<li><p>Open a terminal (PowerShell for example)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ipconfig /flushdns</span></span><br><span class="line"></span><br><span class="line">Windows IP Configuration</span><br><span class="line">Successfully flushed the DNS Resolver Cache.</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
