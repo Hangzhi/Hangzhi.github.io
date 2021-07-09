@@ -239,8 +239,25 @@
 
 
 
+
+
+
 </li>
 </ol>
+<h1 id="Get-“https-cloud-google-com-go-go-get-1-quot-dial-tcp-172-217-24-14-443"><a href="#Get-“https-cloud-google-com-go-go-get-1-quot-dial-tcp-172-217-24-14-443" class="headerlink" title="Get “https://cloud.google.com/go?go-get=1&quot;: dial tcp 172.217.24.14:443"></a>Get “<a target="_blank" rel="noopener" href="https://cloud.google.com/go?go-get=1&quot;">https://cloud.google.com/go?go-get=1&quot;</a>: dial tcp 172.217.24.14:443</h1><p>When building and indexing projects on WIN10 + Goland + WSL2, I met the the error above. There’re several places where we can set the proxy to make it work. </p>
+<h2 id="Win10"><a href="#Win10" class="headerlink" title="Win10"></a>Win10</h2><p>Set the GOPROXY in Terminal</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GOPROXY=https://goproxy.cn,direct</span><br></pre></td></tr></table></figure>
+
+<h2 id="WSL"><a href="#WSL" class="headerlink" title="WSL"></a>WSL</h2><p>Set the GOPROXY in <code>.bashrc</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export GOPROXY=https://goproxy.cn,direct</span><br></pre></td></tr></table></figure>
+
+<h2 id="GoLand"><a href="#GoLand" class="headerlink" title="GoLand"></a>GoLand</h2><p>File - Settings - Go - Go Modules </p>
+<ul>
+<li><p>Check <code>Enable Go module integration</code> </p>
+</li>
+<li><p>Environment : <code>GOPROXY=https://goproxy.cn,direct</code></p>
+</li>
+</ul>
 
         </div>
 
