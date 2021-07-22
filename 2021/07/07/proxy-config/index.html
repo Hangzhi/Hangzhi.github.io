@@ -184,10 +184,10 @@
 
         <div class="post-content">
             <p>此处用来记录 Proxy 的过程中可能会遇到的问题。</p>
-<h1 id="Failed-to-connect-to-github-com-port-443-Connection-timed-out-but-valid-connection-in-browser-Windows"><a href="#Failed-to-connect-to-github-com-port-443-Connection-timed-out-but-valid-connection-in-browser-Windows" class="headerlink" title="Failed to connect to github.com port 443: Connection timed out, but valid connection in browser - Windows"></a>Failed to connect to github.com port 443: Connection timed out, but valid connection in browser - Windows</h1><h2 id="git-config-unset-proxy"><a href="#git-config-unset-proxy" class="headerlink" title="git config unset proxy"></a>git config unset proxy</h2><p>This method don’t work</p>
+<h1 id="Failed-to-connect-to-github-com-port-443-Connection-timed-out-but-valid-connection-in-browser-Windows"><a href="#Failed-to-connect-to-github-com-port-443-Connection-timed-out-but-valid-connection-in-browser-Windows" class="headerlink" title="Failed to connect to github.com port 443: Connection timed out, but valid connection in browser - Windows"></a>Failed to connect to github.com port 443: Connection timed out, but valid connection in browser - Windows</h1><h2 id="git-config-unset-proxy"><a href="#git-config-unset-proxy" class="headerlink" title="git config unset proxy"></a>git config unset proxy</h2><p>This method doesn’t work</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
 
-<h2 id="git-config-proxy"><a href="#git-config-proxy" class="headerlink" title="git config proxy"></a>git config proxy</h2><p>This method don’t work</p>
+<h2 id="git-config-proxy"><a href="#git-config-proxy" class="headerlink" title="git config proxy"></a>git config proxy</h2><p>This method doesn’t work</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global https.proxy http://127.0.0.1:1080</span><br><span class="line">git config --global http.proxy http://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
 
 <h2 id="edit-host-file"><a href="#edit-host-file" class="headerlink" title="edit host file"></a>edit host file</h2><p>The addresses are what I copied from the websites. You should copy your own. </p>
@@ -244,7 +244,8 @@
 
 </li>
 </ol>
-<h1 id="Get-“https-cloud-google-com-go-go-get-1-quot-dial-tcp-172-217-24-14-443"><a href="#Get-“https-cloud-google-com-go-go-get-1-quot-dial-tcp-172-217-24-14-443" class="headerlink" title="Get “https://cloud.google.com/go?go-get=1&quot;: dial tcp 172.217.24.14:443"></a>Get “<a target="_blank" rel="noopener" href="https://cloud.google.com/go?go-get=1&quot;">https://cloud.google.com/go?go-get=1&quot;</a>: dial tcp 172.217.24.14:443</h1><p>When building and indexing projects on WIN10 + Goland + WSL2, I met the the error above. There’re several places where we can set the proxy to make it work. </p>
+<h1 id="Go-Module-Proxy"><a href="#Go-Module-Proxy" class="headerlink" title="Go Module Proxy"></a>Go Module Proxy</h1><p>Get “<a target="_blank" rel="noopener" href="https://cloud.google.com/go?go-get=1&quot;">https://cloud.google.com/go?go-get=1&quot;</a>: dial tcp 172.217.24.14:443 failed time out. </p>
+<p>When building and indexing projects on WIN10 + Goland + WSL2, I met the the error above. There’re several places where we can set the proxy to make it work. </p>
 <h2 id="Win10"><a href="#Win10" class="headerlink" title="Win10"></a>Win10</h2><p>Set the GOPROXY in Terminal</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go env -w GOPROXY=https://goproxy.cn,direct</span><br></pre></td></tr></table></figure>
 
